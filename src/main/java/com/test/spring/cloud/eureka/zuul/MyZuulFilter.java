@@ -1,5 +1,6 @@
 package com.test.spring.cloud.eureka.zuul;
 
+import com.alibaba.fastjson.JSON;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -52,7 +53,7 @@ public class MyZuulFilter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest httpServletRequest = requestContext.getRequest();
         logger.info("send {} request to {}", httpServletRequest.getMethod(), httpServletRequest.getRequestURL().toString());
-
+        logger.info("request-params: {}", JSON.toJSONString(httpServletRequest.getParameterMap()));
         Object sig = httpServletRequest.getParameter("sig");
         if (sig == null) {
             logger.error("no sig, zuul is filting");
