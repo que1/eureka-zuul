@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  *
  */
-@Component
 public class MyZuulFilter extends ZuulFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(MyZuulFilter.class);
