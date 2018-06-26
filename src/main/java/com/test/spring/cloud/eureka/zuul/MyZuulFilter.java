@@ -52,8 +52,7 @@ public class MyZuulFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest httpServletRequest = requestContext.getRequest();
-        logger.info("send {} request to {}", httpServletRequest.getMethod(), httpServletRequest.getRequestURL().toString());
-        logger.info("request-params: {}", JSON.toJSONString(httpServletRequest.getParameterMap()));
+        logger.info("params: " + JSON.toJSONString(httpServletRequest.getParameterMap()) + " send " + httpServletRequest.getMethod() + " request to: ", httpServletRequest.getRequestURL().toString());
         Object sig = httpServletRequest.getParameter("sig");
         if (sig == null) {
             logger.error("no sig, zuul is filting");
@@ -61,7 +60,6 @@ public class MyZuulFilter extends ZuulFilter {
             requestContext.setResponseStatusCode(401);
             return null;
         }
-        logger.info("zuul filting ok");
         return null;
     }
 
