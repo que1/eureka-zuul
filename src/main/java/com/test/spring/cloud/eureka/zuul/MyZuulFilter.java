@@ -50,7 +50,6 @@ public class MyZuulFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest httpServletRequest = requestContext.getRequest();
         logger.info("params: " + JSON.toJSONString(httpServletRequest.getParameterMap()) + " send " + httpServletRequest.getMethod() + " request to: " + httpServletRequest.getRequestURL().toString());
@@ -61,7 +60,6 @@ public class MyZuulFilter extends ZuulFilter {
             requestContext.setResponseStatusCode(401);
             return null;
         }
-
         return null;
     }
 
